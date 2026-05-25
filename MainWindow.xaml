@@ -1,0 +1,46 @@
+﻿    <Window x:Class="PlanLekcji.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Plan lekcji" Height="400" Width="700">
+
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Details on the LEFT (column 0) -->
+        <StackPanel Grid.Column="0" Margin="10">
+            <Label Content="Nazwa" />
+            <TextBox Text="{Binding SelectedSubject.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Label Content="Subname" />
+            <TextBox Text="{Binding SelectedSubject.Subname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Label Content="Room" />
+            <TextBox Text="{Binding SelectedSubject.Room, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Label Content="Note" />
+            <TextBox Text="{Binding SelectedSubject.Note, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Button Content="Dodaj" Command="{Binding AddCommand}" Margin="0,0,10,0"/>
+                <Button Content="Usuń" Command="{Binding DeleteCommand}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- List of subjects on the RIGHT (column 1) -->
+        <ListBox Grid.Column="1" ItemsSource="{Binding Subjects}"
+                 SelectedItem="{Binding SelectedSubject, Mode=TwoWay}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding Subname}" FontStyle="Italic"/>
+                        <TextBlock Text="{Binding Room}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Window>
